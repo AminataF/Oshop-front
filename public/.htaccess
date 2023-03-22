@@ -1,0 +1,12 @@
+Options -Indexes
+RewriteEngine On
+
+# Ex : http://localhost/PHP/oshop-front/public/catalogue/categorie/8 => $_SERVER['BASE_URI'] === '/PHP/oshop-front/public'
+# Ex : http://localhost/PHP/S05/oshop/public/catalogue/categorie/8 => $_SERVER['BASE_URI'] === '/PHP/S05/oshop/public'
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+RewriteRule ^(.*) - [E=BASE_URI:%1]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+#QSA permet de transmettre la query string initiale lors de la réécriture
+RewriteRule . index.php [QSA]
